@@ -17,9 +17,9 @@
 // along with this program; if not, write to the Free Software Foundation,
 // Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
 
-// import * as MarkdownIt from "markdown-it";
+import * as MarkdownIt from "markdown-it";
 
-// const md = new MarkdownIt();
+const md = new MarkdownIt();
 
 let uniqueID = function () {
     var i = 1;
@@ -444,7 +444,7 @@ export class RCText extends RCObject {
             let content = document.createElement("div");
             this.createBasicHTML(linear, i);
             // convert md to html TODO
-            content.innerHTML = this.text; //md.render(this.text);
+            content.innerHTML = md.render(this.text); // this.text
             // add ids to headers
             for (let i = 1; i < 7; i++) {
                 let headers: HTMLElement[] = (<HTMLElement[]><any>content.getElementsByTagName('h' + i));
