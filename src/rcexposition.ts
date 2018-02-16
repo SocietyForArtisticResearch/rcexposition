@@ -79,7 +79,7 @@ export class RCExposition {
         matcher(mq);
     }
 
-    private renderResponsiveOnce() {
+    renderResponsiveOnce() {
         const mq = window.matchMedia("(min-width: " + this.breakpoint + "px)");
         var matcher = (query => (this.weaves[this.currentWeave]).render(!query.matches));
         matcher(mq);
