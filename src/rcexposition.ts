@@ -19,7 +19,7 @@
 
 import * as MarkdownIt from "markdown-it";
 
-const md = new MarkdownIt();
+const md = new MarkdownIt('commonmark');
 
 let uniqueID = function () {
     var i = 1;
