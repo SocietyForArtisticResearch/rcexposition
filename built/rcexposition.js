@@ -207,7 +207,8 @@ export class RCWeave {
             // remove objects that have been fused with other objects
             this.objects.forEach(obj => {
                 if (toBeRemovedIds.some(x => x == obj.id)) {
-                    obj.remove();
+                    console.log("removing" + String(obj.id));
+                    obj.html = undefined;
                 }
             });
             // add all objects to the grid
@@ -216,6 +217,7 @@ export class RCWeave {
                 this.grid.html.appendChild(object.html);
             });
             document.getElementById("weave").innerHTML = this.grid.html.outerHTML;
+            console.log(this.objects);
         }
     }
     /**
@@ -338,15 +340,15 @@ class RCObject {
     asMarkdown() {
         return "";
     }
-    remove() {
-        if (this.html !== undefined) {
-            this.html = undefined;
-            let el = document.getElementById(this.htmlId);
-            if (el != null) {
-                el.parentNode.removeChild(el);
-            }
-        }
-    }
+    // remove() {
+    //     if (this.html !== undefined) {
+    //         this.html = undefined;
+    //         let el = document.getElementById(this.htmlId);
+    //         if (el != null) {
+    //             el.parentNode.removeChild(el);
+    //         }
+    //     }
+    // }
     getTOC(weave) {
         if (this.tocDepth !== undefined) {
             return [{

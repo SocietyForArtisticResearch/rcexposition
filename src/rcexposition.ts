@@ -217,7 +217,6 @@ export class RCWeave {
      * @param {boolean} linear - If true the weave will be linearized, i.e. displayed vertically
      */
     render(linear = false) {
-        console.log(this.objects)
 
         if ((this.objects !== undefined) && (this.objects.length > 0)) {
             this.grid.createHTML(linear);
@@ -252,10 +251,11 @@ export class RCWeave {
             // remove objects that have been fused with other objects
             this.objects.forEach(obj => {
                 if (toBeRemovedIds.some(x => x == obj.id)) {
-                    console.log("removing");
-                    obj.remove();
+                    console.log("removing" + String(obj.id));
+                    obj.html = undefined;
                 }
             });
+
 
             // add all objects to the grid
             // still to be done for each, but for the filtered new ones
@@ -264,6 +264,10 @@ export class RCWeave {
             });
 
             document.getElementById("weave").innerHTML = this.grid.html.outerHTML;
+
+
+            console.log(this.objects)
+
         }
     }
 
@@ -417,15 +421,15 @@ class RCObject {
         return "";
     }
 
-    remove() {
-        if (this.html !== undefined) {
-            this.html = undefined;
-            let el = document.getElementById(this.htmlId);
-            if (el != null) {
-                el.parentNode.removeChild(el);
-            }
-        }
-    }
+    // remove() {
+    //     if (this.html !== undefined) {
+    //         this.html = undefined;
+    //         let el = document.getElementById(this.htmlId);
+    //         if (el != null) {
+    //             el.parentNode.removeChild(el);
+    //         }
+    //     }
+    // }
 
     getTOC(weave) {
         if (this.tocDepth !== undefined) {
