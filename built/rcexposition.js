@@ -283,6 +283,7 @@ class RCObject {
         this.userClass = userClass;
         this.tocDepth = tocDepth;
         this.id = uniqueID();
+        this.htmlId = stringToId(name + "-" + String(this.id));
         if (new.target === RCObject) {
             throw new TypeError("Cannot create an instance of an abstract class");
         }
@@ -292,7 +293,7 @@ class RCObject {
     createBasicHTML(linear = false, i = 0) {
         if (this.html === undefined) {
             let div = document.createElement("div");
-            div.id = this.name;
+            div.id = this.htmlId;
             div.classList.add("rcobject");
             div.classList.add(this.objectClass);
             if (this.userClass !== undefined) {
@@ -388,6 +389,8 @@ export class RCText extends RCObject {
     }
     /** Update text content and update HTML including header ids */
     updateText(text) {
+        let el = document.getElementById(this.htmlId);
+        el.innerHTML = "";
         this.text = text;
         this.html = undefined;
         this.createHTML();

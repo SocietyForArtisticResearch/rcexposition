@@ -45,20 +45,22 @@
 
      
      // removing
-     setTimeout(function () { exposition.removeObjectWithID(ob1.id) }, 5000)
+     //     setTimeout(function () { exposition.removeObjectWithID(ob1.id) }, 5000)
 
      // adding
-     setTimeout(function () { exposition.addObject(new RC.RCText("new text", 1, 1, "just somew new text"), 0) }, 10000)
+     setTimeout(function () { exposition.addObject(new RC.RCText("new text", 1, 1, "just somew new text"), 0) }, 4000)
 
      // updating
-     setTimeout(function () { exposition.updateRCTextWithIdAndContent(ob3.id, "changed content") }, 15000)
+     setTimeout(function () { exposition.updateRCTextWithIdAndContent(ob3.id, "changed content") }, 8000)
+
+     setTimeout(function () { exposition.updateRCTextWithIdAndContent(ob3.id, "CHANGE Again") }, 12000)
 
 
      // inserting
-     setTimeout(function () {
-	 exposition.insertObject(new RC.RCText("new text", 3, 3, "inserted"), 0, 0);
-     }, 20000)
-
+     /* setTimeout(function () {
+	exposition.insertObject(new RC.RCText("new text", 3, 3, "inserted"), 0, 0);
+      * }, 20000)
+      */
      
     </script>
 
