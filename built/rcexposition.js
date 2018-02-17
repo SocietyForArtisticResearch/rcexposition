@@ -184,10 +184,12 @@ export class RCWeave {
             });
             let fusedObjects = [];
             let indexFused = 0;
+            let toBeRemovedIds = [];
             this.objects.forEach(obj => {
                 // is there already an object with same location and size?
                 if (fusedObjects.some((fuseOb, i) => {
                     indexFused = i;
+                    toBeRemovedIds.push(obj.id);
                     return ((fuseOb.gridX == obj.gridX) &&
                         (fuseOb.gridY == obj.gridY) &&
                         (fuseOb.gridXEnd == obj.gridXEnd) &&
@@ -200,6 +202,12 @@ export class RCWeave {
                 }
                 else {
                     fusedObjects.push(obj);
+                }
+            });
+            // remove objects that have been fused with other objects
+            this.objects.forEach(obj => {
+                if (toBeRemovedIds.some(x => x == obj.id)) {
+                    obj.remove();
                 }
             });
             // add all objects to the grid
@@ -330,6 +338,15 @@ class RCObject {
     asMarkdown() {
         return "";
     }
+    remove() {
+        if (this.html !== undefined) {
+            this.html = undefined;
+            let el = document.getElementById(this.htmlId);
+            if (el != null) {
+                el.parentNode.removeChild(el);
+            }
+        }
+    }
     getTOC(weave) {
         if (this.tocDepth !== undefined) {
             return [{
@@ -390,7 +407,9 @@ export class RCText extends RCObject {
     /** Update text content and update HTML including header ids */
     updateText(text) {
         let el = document.getElementById(this.htmlId);
-        el.innerHTML = "";
+        if (el != null) {
+            el.innerHTML = "";
+        }
         this.text = text;
         this.html = undefined;
         this.createHTML();
