@@ -170,6 +170,7 @@ export class RCExposition {
      *  @param { number } weaveId - The weave index
      */
     addObject(obj: RCObject, weaveIdx: number) {
+        console.log("adding" + String(obj.id));
         this.weaves[weaveIdx].objects.push(obj);
         this.renderResponsiveOnce();
     }
@@ -249,12 +250,12 @@ export class RCWeave {
             });
 
             // remove objects that have been fused with other objects
-            this.objects.forEach(obj => {
-                if (toBeRemovedIds.some(x => x == obj.id)) {
-                    console.log("removing" + String(obj.id));
-                    obj.html = undefined;
-                }
-            });
+            // this.objects.forEach(obj => {
+            //     if (toBeRemovedIds.some(x => x == obj.id)) {
+            //         console.log("removing" + String(obj.id));
+            //         obj.html = undefined;
+            //     }
+            // });
 
 
             // add all objects to the grid
@@ -492,10 +493,11 @@ export class RCText extends RCObject {
 
     /** Update text content and update HTML including header ids */
     updateText(text: string) {
-        let el = document.getElementById(this.htmlId);
-        if (el != null) {
-            el.innerHTML = "";
-        }
+        console.log("updating" + String(this.id));
+        // let el = document.getElementById(this.htmlId);
+        // if (el != null) {
+        //     el.innerHTML = "";
+        // }
         this.text = text;
         this.html = undefined;
         this.createHTML();
