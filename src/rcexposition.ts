@@ -223,6 +223,7 @@ export class RCWeave {
             this.grid.createHTML(linear);
             // create html for each object
             this.objects.forEach((object, i) => {
+                object.html = undefined;
                 object.createHTML(linear, i + 1);
             });
 
